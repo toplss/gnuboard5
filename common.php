@@ -844,6 +844,10 @@ if($is_member && !$is_admin && (!defined("G5_CERT_IN_PROG") || !G5_CERT_IN_PROG)
 
 ob_start();
 
+// 플레이트 설치
+require 'vendor/autoload.php';
+
+
 // 자바스크립트에서 go(-1) 함수를 쓰면 폼값이 사라질때 해당 폼의 상단에 사용하면
 // 캐쉬의 내용을 가져옴. 완전한지는 검증되지 않음
 header('Content-Type: text/html; charset=utf-8');
