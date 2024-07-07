@@ -847,6 +847,10 @@ ob_start();
 // 플레이트 설치
 require 'vendor/autoload.php';
 
+use League\Plates\Engine;
+
+// 플레이트 템플릿 엔진 설정
+$templates = new Engine(__DIR__ . '/templates');
 
 // 자바스크립트에서 go(-1) 함수를 쓰면 폼값이 사라질때 해당 폼의 상단에 사용하면
 // 캐쉬의 내용을 가져옴. 완전한지는 검증되지 않음
