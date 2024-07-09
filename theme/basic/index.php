@@ -25,13 +25,18 @@ $templatArr     = new TemplatArr();
 
 $result = $board_model->index($g5);
 
+if (empty($g5['lo_location'])) $g5['lo_location'] = '';
+if (empty($g5['lo_url'])) $g5['lo_url'] = '';
+
 $t_arr = [
     'result' => $result, 
     'page' => 'board', 
     'config' => $config,
     'g5' => $g5,
-    'g5_head_title' => $g5_head_title,
     'templatArr' => $templatArr,
+    'is_admin' => $is_admin,
+    'is_member' => $is_member,
+    'member' => $member,
 ];
 
 $templatArr->setterArr($t_arr);

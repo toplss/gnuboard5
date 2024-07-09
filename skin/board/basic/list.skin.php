@@ -15,7 +15,6 @@ $tem_list = [
     'category_option' => $category_option,
     'bo_table' => $bo_table,
     'sfl' => $sfl,
-    'stxt' => $sxt,
     'spt' => $spt,
     'sca' => $sca,
     'sst' => $sst,
@@ -26,7 +25,19 @@ $tem_list = [
     'rss_href' => $rss_href,
     'board' => $board,
     'list' => $list,
-
+    'sxt'  => $sxt ?? '',
+    'is_checkbox' => $is_checkbox,
+    'is_good' => $is_good,
+    'is_nogood' => $is_nogood,
+    'board_skin_url' => $board_skin_url,
+    'is_category'   => $is_category,
+    'write_href' => $write_href,
+    'is_admin' => $is_admin,
+    'qstr2' => $qstr2,
+    'wr_id' => $wr_id,
+    'write_pages' => $write_pages,
+    'list_href' => $list_href,
+    'is_auth' => $is_auth,
 ];
 
 echo $templates->render('layouts/board/list', $tem_list);

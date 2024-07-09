@@ -79,23 +79,36 @@ function outlogin($skin_dir='basic')
         }
     });
 
-    $t_arr = [
-        'outlogin_skin_url' => urldecode($outlogin_skin_url),
-        'outlogin_action_url' => urldecode($outlogin_action_url),
-        'member' => $member,
-        'config' => $config, 
-        'g5' => $g5, 
-        'is_admin' => $is_admin, 
-        'is_member' => $is_member,
-        'nick' => $nick,
-    ];
     
-    if ($is_member)
+    
+    if ($is_member) :
+        $t_arr = [
+            'outlogin_skin_url' => urldecode($outlogin_skin_url),
+            'outlogin_action_url' => urldecode($outlogin_action_url),
+            'member' => $member,
+            'config' => $config, 
+            'g5' => $g5, 
+            'is_admin' => $is_admin, 
+            'is_member' => $is_member,
+            'nick' => $nick,
+            'point' => $point,
+            'memo_not_read' => $memo_not_read,
+            'mb_scrap_cnt' => $mb_scrap_cnt,
+        ];
         // include_once ($outlogin_skin_path.'/outlogin.skin.2.php');
         echo $templates->render('layouts/member/login', $t_arr);
-    else // 로그인 전이라면
+    else : // 로그인 전이라면
         // include_once ($outlogin_skin_path.'/outlogin.skin.1.php');
+        $t_arr = [
+            'outlogin_skin_url' => urldecode($outlogin_skin_url),
+            'outlogin_action_url' => urldecode($outlogin_action_url),
+            'member' => $member,
+            'config' => $config, 
+            'g5' => $g5, 
+            
+        ];
         echo $templates->render('layouts/member/outlogin', $t_arr);
+    endif;
 
         
     $content = ob_get_contents();

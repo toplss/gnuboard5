@@ -16,6 +16,20 @@ $list = [
     'move_href'     => $move_href,
     'search_href'   => $search_href,
     'category_name' => $category_name,
+    'board_skin_url' => $board_skin_url,
+    'is_ip_view'    => $is_ip_view,
+    'board'         => $board,
+    'scrap_href'    => $scrap_href,
+    'is_signature'  => $is_signature,
+    'good_href'     => $good_href,
+    'nogood_href'   => $nogood_href,
+    'prev_href'     => $prev_href,
+    'next_href'     => $next_href,
+    'next_wr_subject' => $next_wr_subject ?? '',
+    'prev_wr_subject' => $prev_wr_subject ?? '',
+    'prev_wr_date'  => $prev_wr_date ?? '',
+    'next_wr_date'  => $next_wr_date ?? '',
+    'ip'            => $ip ?? ''
 ];
 
 // 플레이트 레잉아웃
