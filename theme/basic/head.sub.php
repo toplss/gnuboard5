@@ -51,6 +51,7 @@ if($config['cf_add_meta'])
 <title><?php echo $g5_head_title; ?></title>
 <?php
 $shop_css = '';
+
 if (defined('_SHOP_')) $shop_css = '_shop';
 echo '<link rel="stylesheet" href="'.run_replace('head_css_url', G5_THEME_CSS_URL.'/'.(G5_IS_MOBILE?'mobile':'default').$shop_css.'.css?ver='.G5_CSS_VER, G5_THEME_URL).'">'.PHP_EOL;
 ?>
@@ -97,6 +98,19 @@ if(G5_IS_MOBILE) {
 if(!defined('G5_IS_ADMIN'))
     echo $config['cf_add_script'];
 ?>
+
+<link rel="stylesheet" href="http://gnuboard5_b.test/theme/basic/css/default.css?ver=2303229">
+<link rel="stylesheet" href="http://gnuboard5_b.test/js/font-awesome/css/font-awesome.min.css?ver=2303229">
+<link rel="stylesheet" href="http://gnuboard5_b.test/theme/basic/skin/connect/basic/style.css?ver=2303229">
+<link rel="stylesheet" href="http://gnuboard5_b.test/theme/basic/skin/popular/basic/style.css?ver=2303229">
+<link rel="stylesheet" href="http://gnuboard5_b.test/theme/basic/skin/latest/pic_list/style.css?ver=2303229">
+<link rel="stylesheet" href="http://gnuboard5_b.test/theme/basic/skin/latest/pic_block/style.css?ver=2303229">
+<link rel="stylesheet" href="http://gnuboard5_b.test/theme/basic/skin/latest/basic/style.css?ver=2303229">
+<link rel="stylesheet" href="http://gnuboard5_b.test/theme/basic/skin/outlogin/basic/style.css?ver=2303229">
+<link rel="stylesheet" href="http://gnuboard5_b.test/theme/basic/skin/latest/notice/style.css?ver=2303229">
+<link rel="stylesheet" href="http://gnuboard5_b.test/theme/basic/skin/visit/basic/style.css?ver=2303229">
+<link rel="stylesheet" href="http://gnuboard5_b.test/js/owlcarousel/owl.carousel.min.css?ver=2303229">
+
 </head>
 <body<?php echo isset($g5['body_script']) ? $g5['body_script'] : ''; ?>>
 <?php

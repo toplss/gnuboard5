@@ -844,14 +844,6 @@ if($is_member && !$is_admin && (!defined("G5_CERT_IN_PROG") || !G5_CERT_IN_PROG)
 
 ob_start();
 
-// 플레이트 설치
-require 'vendor/autoload.php';
-
-use League\Plates\Engine;
-
-// 플레이트 템플릿 엔진 설정
-$templates = new Engine(__DIR__ . '/templates');
-
 // 자바스크립트에서 go(-1) 함수를 쓰면 폼값이 사라질때 해당 폼의 상단에 사용하면
 // 캐쉬의 내용을 가져옴. 완전한지는 검증되지 않음
 header('Content-Type: text/html; charset=utf-8');
@@ -863,3 +855,29 @@ header('Cache-Control: pre-check=0, post-check=0, max-age=0'); // HTTP/1.1
 header('Pragma: no-cache'); // HTTP/1.0
 
 run_event('common_header');
+
+
+// 플레이트 설치
+require 'vendor/autoload.php';
+
+use League\Plates\Engine;
+
+// 플레이트 템플릿 엔진 설정
+$templates = new Engine(__DIR__ . '/templates');
+
+// 사용자 인증 함수 추가
+$templates->registerFunction('is_member', function() use ($member) {
+    if (isset($member['mb_id']) && $member['mb_id']) {
+        return true;
+    } else {
+        return false;
+    }
+});
+
+$templates->registerFunction('is_guest', function() use ($member) {
+    if (!isset($member['mb_id']) && !$member['mb_id']) {
+        return true;
+    } else {
+        return false;
+    }
+});

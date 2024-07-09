@@ -1,4 +1,6 @@
 <!-- templates/hello.php -->
 <?php 
-$this->layout('layouts/default', ['result' => $result, 'page' => $page]);
+
+$this->layout('layouts/default', $templatArr->getterArr());
+
 ?>

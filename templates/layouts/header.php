@@ -12,7 +12,6 @@ if(G5_COMMUNITY_USE === false) {
     return;
 }
 
-
 include_once(G5_THEME_PATH.'/head.sub.php');
 include_once(G5_LIB_PATH.'/latest.lib.php');
 include_once(G5_LIB_PATH.'/outlogin.lib.php');
@@ -28,20 +27,20 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
     <div id="skip_to_container"><a href="#container">본문 바로가기</a></div>
 
     <?php
-    if(defined('_INDEX_')) { // index에서만 실행
+    if (defined('_INDEX_')) : // index에서만 실행
         include G5_BBS_PATH.'/newwin.inc.php'; // 팝업레이어
-    }
+    endif
     ?>
     <div id="tnb">
     	<div class="inner">
-            <?php if(G5_COMMUNITY_USE) { ?>
+            <?php if (G5_COMMUNITY_USE) : ?>
     		<ul id="hd_define">
     			<li class="active"><a href="<?php echo G5_URL ?>/">커뮤니티</a></li>
-                <?php if (defined('G5_USE_SHOP') && G5_USE_SHOP) { ?>
+                <?php if (defined('G5_USE_SHOP') && G5_USE_SHOP) : ?>
     			<li><a href="<?php echo G5_SHOP_URL ?>/">쇼핑몰</a></li>
-                <?php } ?>
+                <?php endif ?>
     		</ul>
-            <?php } ?>
+            <?php endif ?>
 			<ul id="hd_qnb">
 	            <li><a href="<?php echo G5_BBS_URL ?>/faq.php">FAQ</a></li>
 	            <li><a href="<?php echo G5_BBS_URL ?>/qalist.php">Q&A</a></li>
@@ -102,16 +101,16 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
             <?php echo popular('theme/basic'); // 인기검색어, 테마의 스킨을 사용하려면 스킨을 theme/basic 과 같이 지정  ?>
         </div>
         <ul class="hd_login">        
-            <?php if ($is_member) {  ?>
+            <?php if ($is_member) :  ?>
             <li><a href="<?php echo G5_BBS_URL ?>/member_confirm.php?url=<?php echo G5_BBS_URL ?>/register_form.php">정보수정</a></li>
             <li><a href="<?php echo G5_BBS_URL ?>/logout.php">로그아웃</a></li>
-            <?php if ($is_admin) {  ?>
+            <?php if ($is_admin) :  ?>
             <li class="tnb_admin"><a href="<?php echo correct_goto_url(G5_ADMIN_URL); ?>">관리자</a></li>
-            <?php }  ?>
-            <?php } else {  ?>
+            <?php endif  ?>
+            <?php else :  ?>
             <li><a href="<?php echo G5_BBS_URL ?>/register.php">회원가입</a></li>
             <li><a href="<?php echo G5_BBS_URL ?>/login.php">로그인</a></li>
-            <?php }  ?>
+            <?php endif  ?>
 
         </ul>
     </div>
@@ -125,7 +124,7 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
 				$menu_datas = get_menu_db(0, true);
 				$gnb_zindex = 999; // gnb_1dli z-index 값 설정용
                 $i = 0;
-                foreach( $menu_datas as $row ){
+                foreach( $menu_datas as $row ) :
                     if( empty($row) ) continue;
                     $add_class = (isset($row['sub']) && $row['sub']) ? 'gnb_al_li_plus' : '';
                 ?>
@@ -133,7 +132,7 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
                     <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="gnb_1da"><?php echo $row['me_name'] ?></a>
                     <?php
                     $k = 0;
-                    foreach( (array) $row['sub'] as $row2 ){
+                    foreach( (array) $row['sub'] as $row2 ) :
 
                         if( empty($row2) ) continue; 
 
@@ -143,7 +142,7 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
                         <li class="gnb_2dli"><a href="<?php echo $row2['me_link']; ?>" target="_<?php echo $row2['me_target']; ?>" class="gnb_2da"><?php echo $row2['me_name'] ?></a></li>
                     <?php
                     $k++;
-                    }   //end foreach $row2
+                    endforeach;   //end foreach $row2
 
                     if($k > 0)
                         echo '</ul></div>'.PHP_EOL;
@@ -151,11 +150,11 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
                 </li>
                 <?php
                 $i++;
-                }   //end foreach $row
+                endforeach;   //end foreach $row
 
-                if ($i == 0) {  ?>
-                    <li class="gnb_empty">메뉴 준비 중입니다.<?php if ($is_admin) { ?> <a href="<?php echo G5_ADMIN_URL; ?>/menu_list.php">관리자모드 &gt; 환경설정 &gt; 메뉴설정</a>에서 설정하실 수 있습니다.<?php } ?></li>
-                <?php } ?>
+                if ($i == 0) :  ?>
+                    <li class="gnb_empty">메뉴 준비 중입니다.<?php if ($is_admin) : ?> <a href="<?php echo G5_ADMIN_URL; ?>/menu_list.php">관리자모드 &gt; 환경설정 &gt; 메뉴설정</a>에서 설정하실 수 있습니다.<?php endif ?></li>
+                <?php endif ?>
             </ul>
             <div id="gnb_all">
                 <h2>전체메뉴</h2>
@@ -163,20 +162,20 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
                     <?php
                     
                     $i = 0;
-                    foreach( $menu_datas as $row ){
+                    foreach ( $menu_datas as $row ) :
                     ?>
                     <li class="gnb_al_li">
                         <a href="<?php echo $row['me_link']; ?>" target="_<?php echo $row['me_target']; ?>" class="gnb_al_a"><?php echo $row['me_name'] ?></a>
                         <?php
                         $k = 0;
-                        foreach( (array) $row['sub'] as $row2 ){
+                        foreach ( (array) $row['sub'] as $row2 ) :
                             if($k == 0)
                                 echo '<ul>'.PHP_EOL;
                         ?>
                             <li><a href="<?php echo $row2['me_link']; ?>" target="_<?php echo $row2['me_target']; ?>"><?php echo $row2['me_name'] ?></a></li>
                         <?php
                         $k++;
-                        }   //end foreach $row2
+                        endforeach;   //end foreach $row2
 
                         if($k > 0)
                             echo '</ul>'.PHP_EOL;
@@ -184,11 +183,11 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
                     </li>
                     <?php
                     $i++;
-                    }   //end foreach $row
+                    endforeach;   //end foreach $row
 
-                    if ($i == 0) {  ?>
-                        <li class="gnb_empty">메뉴 준비 중입니다.<?php if ($is_admin) { ?> <br><a href="<?php echo G5_ADMIN_URL; ?>/menu_list.php">관리자모드 &gt; 환경설정 &gt; 메뉴설정</a>에서 설정하실 수 있습니다.<?php } ?></li>
-                    <?php } ?>
+                    if ($i == 0) :  ?>
+                        <li class="gnb_empty">메뉴 준비 중입니다.<?php if ($is_admin) : ?> <br><a href="<?php echo G5_ADMIN_URL; ?>/menu_list.php">관리자모드 &gt; 환경설정 &gt; 메뉴설정</a>에서 설정하실 수 있습니다.<?php endif ?></li>
+                    <?php endif ?>
                 </ul>
                 <button type="button" class="gnb_close_btn"><i class="fa fa-times" aria-hidden="true"></i></button>
             </div>
@@ -218,4 +217,4 @@ include_once(G5_LIB_PATH.'/popular.lib.php');
     <div id="container_wr">
    
     <div id="container">
-        <?php if (!defined("_INDEX_")) { ?><h2 id="container_title"><span title="<?php echo get_text($g5['title']); ?>"><?php echo get_head_title($g5['title']); ?></span></h2><?php }
+        <?php if (!defined("_INDEX_")) : ?><h2 id="container_title"><span title="<?php echo get_text($g5['title']); ?>"><?php echo get_head_title($g5['title']); ?></span></h2><?php endif; ?>

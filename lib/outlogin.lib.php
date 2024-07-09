@@ -1,6 +1,9 @@
 <?php
 if (!defined('_GNUBOARD_')) exit;
 
+use League\Plates\Engine;
+
+
 // 외부로그인
 function outlogin($skin_dir='basic')
 {
@@ -8,6 +11,8 @@ function outlogin($skin_dir='basic')
     
     $is_auth = false;
 
+    $templates = new Engine($_SERVER['DOCUMENT_ROOT'] . '/templates');
+    
     if (array_key_exists('mb_nick', $member)) {
         $nick  = get_text(cut_str($member['mb_nick'], $config['cf_cut_name']));
     }
@@ -55,12 +60,48 @@ function outlogin($skin_dir='basic')
     $outlogin_action_url = G5_HTTPS_BBS_URL.'/login_check.php';
     
     ob_start();
+
+
+    // 사용자 인증 함수 추가
+    $templates->registerFunction('is_member', function() use ($member) {
+        if (isset($member['mb_id']) && $member['mb_id']) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    $templates->registerFunction('is_guest', function() use ($member) {
+        if (!isset($member['mb_id']) && !$member['mb_id']) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
+    $t_arr = [
+        'outlogin_skin_url' => urldecode($outlogin_skin_url),
+        'outlogin_action_url' => urldecode($outlogin_action_url),
+        'member' => $member,
+        'config' => $config, 
+        'g5' => $g5, 
+        'is_admin' => $is_admin, 
+        'is_member' => $is_member,
+        'nick' => $nick,
+    ];
+    
     if ($is_member)
-        include_once ($outlogin_skin_path.'/outlogin.skin.2.php');
+        // include_once ($outlogin_skin_path.'/outlogin.skin.2.php');
+        echo $templates->render('layouts/member/login', $t_arr);
     else // 로그인 전이라면
-        include_once ($outlogin_skin_path.'/outlogin.skin.1.php');
+        // include_once ($outlogin_skin_path.'/outlogin.skin.1.php');
+        echo $templates->render('layouts/member/outlogin', $t_arr);
+
+        
     $content = ob_get_contents();
     ob_end_clean();
 
     return run_replace('outlogin_content', $content, $is_auth, $outlogin_url, $outlogin_action_url);
 }
+
+

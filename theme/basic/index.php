@@ -1,7 +1,9 @@
 <?php
-require_once("Models/Board.php");
+require_once("models/Board.php");
+require_once("templatClass/TemplatArr.php");
 
 use Model\Board;
+use Template\TemplatArr;
 
 if (!defined('_INDEX_')) define('_INDEX_', true);
 if (!defined('_GNUBOARD_')) exit; // 개별 페이지 접근 불가
@@ -18,8 +20,21 @@ if(G5_COMMUNITY_USE === false) {
 
 // include_once(G5_THEME_PATH.'/head.php');
 
-$board_model = new Board();
+$board_model    = new Board();
+$templatArr     = new TemplatArr();
+
 $result = $board_model->index($g5);
 
-echo $templates->render('index', ['result' => $result, 'page' => 'board']);
+$t_arr = [
+    'result' => $result, 
+    'page' => 'board', 
+    'config' => $config,
+    'g5' => $g5,
+    'g5_head_title' => $g5_head_title,
+    'templatArr' => $templatArr,
+];
+
+$templatArr->setterArr($t_arr);
+
+echo $templates->render('index', $templatArr->getterArr());
 ?>

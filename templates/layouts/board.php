@@ -4,7 +4,7 @@
 <div class="latest_wr">
 <!-- 최신글 시작 { -->
     <?php
-    foreach ($result as $key => $row):
+    foreach ($result as $key => $row) :
 		$lt_style = '';
     	if ($key % 3 !== 0 ) $lt_style = "margin-left:2%";
     ?>

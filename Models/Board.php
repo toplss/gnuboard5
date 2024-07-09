@@ -4,12 +4,17 @@ namespace Model;
 include_once(G5_LIB_PATH.'/connect.lib.php');
 
 
-class Board {
-
+class Board 
+{
+    /**
+     * 메인 페이지 게시판 목록조회
+     *
+     * @param array $g5
+     * @return void
+     */
     public function index(array $g5)
     {
         if (!empty($g5)) {
-
             //  최신글
             $sql = " select bo_table
             from `{$g5['board_table']}` a left join `{$g5['group_table']}` b on (a.gr_id=b.gr_id)
